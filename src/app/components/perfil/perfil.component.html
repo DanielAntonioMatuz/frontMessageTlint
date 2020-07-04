@@ -48,7 +48,7 @@
               <div class="col-3 d-xl-none">
                 <ul class="list-inline mb-0">
                   <li class="list-inline-item">
-                    <a class="text-muted px-0"  data-chat="open">
+                    <a class="text-muted px-0"  data-chat="open" [routerLink]="['/messenger']">
                       <i class="icon-md fe-chevron-left"></i>
                     </a>
                   </li>
@@ -165,8 +165,8 @@
                         <div class="row no-gutters align-items-center">
                           <!-- Title -->
                           <div class="col">
-                            <h5>Configuracione</h5>
-                            <p>Configuraciones de tu cuenta.</p>
+                            <h5>Configuraciones</h5>
+                            <p>Configuraciones de tu cuenta Tlint</p>
                           </div>
 
                           <!-- Icon -->
@@ -192,7 +192,7 @@
                                 <label class="custom-control-label" for="custom-switch-2"></label>
                               </div>
                             </div>
-                            <p>Activarr y/o desactivar estado de cuenta.</p>
+                            <p>Mostrar si estas activo o inactivo en Tlint</p>
                           </li>
 
                         </ul>
@@ -255,8 +255,8 @@
                         <div class="row no-gutters align-items-center">
                           <!-- Title -->
                           <div class="col">
-                            <h5>Redes Sociales</h5>
-                            <p>Vincula tus redes sociales.</p>
+                            <h5>Tu ID de Tlint</h5>
+                            <p>Tu ID único de Tlint</p>
                           </div>
 
                           <!-- Icon -->
@@ -273,40 +273,14 @@
 
                         <!-- Twitter -->
                         <div class="form-group">
-                          <label class="small" for="profile-twitter">Twitter</label>
+                          <label class="small" for="profile-twitter">Tlint</label>
                           <div class="input-group">
                             <div class="input-group-prepend">
                               <div class="btn btn-ico btn-secondary btn-minimal">
                                 <i class="fe-twitter"></i>
                               </div>
                             </div>
-                            <input id="profile-twitter" type="text" class="form-control form-control-lg" placeholder="Enlace de cuenta" aria-label="Username" #twitter="ngModel" name="twitter" [(ngModel)]="data.twitter">
-                          </div>
-                        </div>
-
-                        <!-- Facebook -->
-                        <div class="form-group">
-                          <label class="small" for="profile-facebook">Facebook</label>
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="btn btn-ico btn-secondary btn-minimal">
-                                <i class="fe-facebook"></i>
-                              </div>
-                            </div>
-                            <input id="profile-facebook" type="text" class="form-control form-control-lg" placeholder="Username" placeholder="Enlace de cuenta" aria-label="Username" #facebook="ngModel" name="facebook" [(ngModel)]="data.facebook">
-                          </div>
-                        </div>
-
-                        <!-- Github -->
-                        <div class="form-group">
-                          <label class="small" for="profile-tlint">Tlint</label>
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="btn btn-ico btn-secondary btn-minimal">
-                                <i class="fe-github"></i>
-                              </div>
-                            </div>
-                            <input id="profile-tlint" type="text" class="form-control form-control-lg" placeholder="Enlace de cuenta" aria-label="Username"  #facebook="ngModel" name="facebook" [(ngModel)]="data.tlint">
+                            <input id="profile-twitter" type="text" class="form-control form-control-lg" placeholder="Enlace de cuenta" aria-label="Username" #tlint="ngModel" name="tlint" [(ngModel)]="data.tlint">
                           </div>
                         </div>
 
