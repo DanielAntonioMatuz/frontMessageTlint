@@ -60,7 +60,7 @@
                 <div class="media text-center text-xl-left">
                   <div class="media-body align-self-center text-truncate">
                     <h6 class="text-truncate mb-n1">Configuraciones</h6>
-                    <small class="text-muted">Edite su perfil</small>
+                    <small class="text-muted">Edite su perfil de Tlint</small>
                   </div>
                 </div>
               </div>
@@ -112,7 +112,7 @@
 
                         <div class="form-group">
 
-                          <img [src]="imgselected || url+'usuario/img/'+datos_user.imagen" class="rounded" style="width: 150px;display:block;
+                          <img [src]="imgselected || url+'usuario/img/'+datos_user.image" class="rounded" style="width: 150px;display:block;
                                                     margin:auto;margin-bottom: 30px">
                           <div class="position-relative text-center bg-secondary rounded p-6">
                             <div class="avatar bg-primary text-white mb-5">
@@ -126,18 +126,43 @@
                         </div>
 
                         <div class="form-group">
-                          <label class="small" for="profile-name">Nombres</label>
-                          <input class="form-control form-control-lg" id="profile-name" type="text" #nombre="ngModel" name="nombre" [(ngModel)]="data.nombre" required>
-                          <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" style="width: 100%;">
-                            <div class="invalid-feedback" style="display:block" *ngIf="nombre.errors.required">
+                          <label class="small" for="profile-name">Nombre</label>
+                          <input class="form-control form-control-lg" id="profile-name" type="text" #name="ngModel" name="name" [(ngModel)]="data.name" required>
+                          <div *ngIf="name.invalid && (name.dirty || name.touched)" style="width: 100%;">
+                            <div class="invalid-feedback" style="display:block" *ngIf="name.errors.required">
                               El nombre es requerido
                             </div>
                           </div>
                         </div>
 
                         <div class="form-group">
+                          <label class="small" for="profile-surname">Apellido</label>
+                          <input class="form-control form-control-lg" id="profile-surname" type="text" #surname="ngModel" name="surname" [(ngModel)]="data.surname" required>
+                          <div *ngIf="surname.invalid && (surname.dirty || surname.touched)" style="width: 100%;">
+                            <div class="invalid-feedback" style="display:block" *ngIf="surname.errors.required">
+                              El apellido es requerido
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="small" for="profile-nickname">Nickname</label>
+                          <input class="form-control form-control-lg" readonly id="profile-nickname" type="text" value="{{data.nick}}">
+                        </div>
+
+                        <div class="form-group">
                           <label class="small" for="profile-phone">Telefono</label>
-                          <input class="form-control form-control-lg" id="profile-phone" type="text" #telefono="ngModel" name="telefono" [(ngModel)]="data.telefono">
+                          <input class="form-control form-control-lg" id="profile-phone" type="text" #cellphone="ngModel" name="cellphone" [(ngModel)]="data.cellphone">
+                        </div>
+
+                        <div class="form-group">
+                          <label class="small" for="profile-location">Ubicación</label>
+                          <input class="form-control form-control-lg" id="profile-location" type="text" #location="ngModel" name="location" [(ngModel)]="data.location">
+                        </div>
+
+                        <div class="form-group">
+                          <label class="small" for="profile-date">Fecha de cumpleaños</label>
+                          <input class="form-control form-control-lg" id="profile-date" type="date" #date="ngModel" name="date" [(ngModel)]="data.date">
                         </div>
 
                         <div class="form-group">
@@ -147,7 +172,7 @@
 
                         <div class="form-group">
                           <label class="small" for="profile-about">Biografía</label>
-                          <textarea class="form-control form-control-lg" id="profile-about" rows="3" placeholder="Escribe sobre ti" data-autosize="true" #bio="ngModel" name="bio" [(ngModel)]="data.bio"></textarea>
+                          <textarea class="form-control form-control-lg" id="profile-about" rows="3" placeholder="Escribe sobre ti" data-autosize="true" #description="ngModel" name="description" [(ngModel)]="data.description"></textarea>
                         </div>
 
 
@@ -280,7 +305,7 @@
                                 <i class="fe-twitter"></i>
                               </div>
                             </div>
-                            <input id="profile-twitter" type="text" class="form-control form-control-lg" placeholder="Enlace de cuenta" aria-label="Username" #tlint="ngModel" name="tlint" [(ngModel)]="data.tlint">
+                            <input id="profile-twitter" type="text" class="form-control form-control-lg" placeholder="ID de cuenta" readonly aria-label="Username" value="{{data._id}}">
                           </div>
                         </div>
 

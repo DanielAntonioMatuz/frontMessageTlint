@@ -18,7 +18,7 @@ export class RegistroComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.user = new User('','','','','','','','', '', '',false);
+    this.user = new User('','','','','','','','', '', '', '', '','', false);
   }
 
   onSubmit(registroForm) {

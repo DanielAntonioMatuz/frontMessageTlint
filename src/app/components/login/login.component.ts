@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user = new User('','','','','','','','', '', '', false);
+    this.user = new User('','','','','','','','', '', '', '', '','', false);
 
     if(this.data_user){
       this._router.navigate(['messenger']);

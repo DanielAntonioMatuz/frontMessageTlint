@@ -63,8 +63,8 @@ export class MessengerComponent implements OnInit {
 
           this.userAlfabet.sort(function(a, b) {
 
-            var nameA = a.nombre.toUpperCase();
-            var nameB = b.nombre.toUpperCase();
+            var nameA = a.name.toUpperCase();
+            var nameB = b.name.toUpperCase();
 
             if (nameA < nameB) {     return -1;   }      if (nameA > nameB) {
               return 1;
@@ -79,7 +79,7 @@ export class MessengerComponent implements OnInit {
 
           let nameB;
           for(let i = 0; i < this.userAlfabet.length; i++){
-            nameB = this.userAlfabet[i].nombre.toUpperCase();
+            nameB = this.userAlfabet[i].name.toUpperCase();
             if(nameB.charAt(0) == 'A'){
               this.A.push(this.userAlfabet[i]);
             } else {
@@ -212,9 +212,9 @@ export class MessengerComponent implements OnInit {
 
             if(response.user._id != this.de){
               console.log('Audio');
-              Push.create(response.user.nombre, {
+              Push.create(response.user.name, {
                 body: data.message.msm,
-                icon: this.url+'usuario/img/'+response.user.imagen,
+                icon: this.url+'usuario/img/'+response.user.image,
                 timeout: 4000,
                 onClick: function () {
                   window.focus();

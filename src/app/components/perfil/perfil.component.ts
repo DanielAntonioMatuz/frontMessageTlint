@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
-import { GLOBAL } from 'src/app/services/GLOBAL';
-import * as io from "socket.io-client";
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {UserService} from 'src/app/services/user.service';
+import {GLOBAL} from 'src/app/services/GLOBAL';
+import * as io from 'socket.io-client';
 
-interface HtmlInputEvent extends Event{
-  target : HTMLInputElement & EventTarget;
+interface HtmlInputEvent extends Event {
+  target: HTMLInputElement & EventTarget;
 }
 
 @Component({
@@ -19,10 +19,10 @@ export class PerfilComponent implements OnInit {
   public identity;
   public url;
   public de;
-  public datos_config  : any = {};
-  public datos_user : any = {};
-  public data : any = {};
-  public data_send : any = {};
+  public datos_config: any = {};
+  public datos_user: any = {};
+  public data: any = {};
+  public data_send: any = {};
   public password;
   public confirm_pass;
   public msm_confirm_pass;
@@ -30,13 +30,13 @@ export class PerfilComponent implements OnInit {
   public usuarios;
 
   public file: File;
-  public imgselected : String | ArrayBuffer;
+  public imgselected: String | ArrayBuffer;
   confirm_passText: any;
   passwordText: any;
 
   constructor(
-    private _userService : UserService,
-    private _router :Router,
+    private _userService: UserService,
+    private _router: Router,
   ) {
     this.identity = this._userService.getIdentity();
     this.url = GLOBAL.url;
@@ -45,38 +45,47 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit() {
 
-    if(!this.identity){
+    if (!this.identity) {
       this._router.navigate(['']);
-    }else{
+    } else {
       this._userService.get_use(this.de).subscribe(
-        response =>{
+        response => {
+
           this.datos_config = response.config;
           this.datos_user = response.user;
+
           this.data = {
-            nombre: this.datos_user.nombre,
-            email: this.datos_user.email,
-            telefono: this.datos_user.telefono,
-            bio: this.datos_user.bio,
-            twitter: this.datos_user.twitter,
-            facebook: this.datos_user.facebook,
-            tlint: this.datos_user.tlint,
-
+            _id: this.datos_user._id,
+            name: this.datos_user.name,
+            surname: this.datos_user.surname,
+            cellphone: this.datos_user.cellphone,
+            image: this.file,
+            description: this.datos_user.description,
+            imageBackground: this.datos_user.imageBackground,
+            nick: this.datos_user.nick,
+            role: this.datos_user.role,
             estado: this.datos_user.estado,
+            location: this.datos_user.location,
+            date: this.datos_user.date,
+            email: this.datos_user.email
+          };
+          console.log(this.data._id);
 
-          }
 
         },
-        error =>{
+        error => {
 
         }
-      )
+      );
     }
 
   }
 
-  imgSelected(event: Event){
-    if(event.target.files && event.target.files[0]){
-      this.file = <File>event.target.files[0];
+  public files;
+
+  imgSelected(event: Event) {
+    if (event.target.files && event.target.files[0]) {
+      this.file = <File> event.target.files[0];
 
       const reader = new FileReader();
       reader.onload = e => this.imgselected = reader.result;
@@ -85,45 +94,44 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-  onSubmit(configForm){
-    if(configForm.valid){
+  onSubmit(configForm) {
+    if (configForm.valid) {
 
-      if(configForm.value.password != undefined){
+      if (configForm.value.password != undefined) {
 
 
-        if(configForm.value.password != configForm.value.confirm_pass){
-          this.msm_confirm_pass = "Las contraseñas no coinciden";
-        }else{
+        if (configForm.value.password != configForm.value.confirm_pass) {
+          this.msm_confirm_pass = 'Las contraseñas no coinciden';
+        } else {
 
-          this.msm_confirm_pass = "";
+          this.msm_confirm_pass = '';
           this.data_send = {
             _id: this.datos_user._id,
-            nombre: configForm.value.nombre,
-            telefono: configForm.value.telefono,
-            imagen : this.file,
-            password: configForm.value.password,
-            bio: configForm.value.bio,
-            twitter: configForm.value.twitter,
-            facebook: configForm.value.facebook,
-            tlint: configForm.value.tlint,
-
+            name: configForm.value.name,
+            surname: configForm.value.surname,
+            cellphone: configForm.value.cellphone,
+            image: this.file,
+            description: configForm.value.description,
             estado: configForm.value.estado,
+            location: configForm.value.location,
+            date: configForm.value.date,
+            password: configForm.value.password,
 
-          }
+          };
 
           this.socket.emit('save-identity', {identity: this.data_send});
 
           this._userService.update_config(this.data_send).subscribe(
-            response =>{
+            response => {
               this.msm_success = 'Se actualizó su perfil con exito';
               this._userService.listar('').subscribe(
-                response =>{
+                response => {
                   this.usuarios = response.users;
                   this.socket.emit('save-users', {users: this.usuarios});
 
 
                 },
-                errorr =>{
+                errorr => {
 
                 }
               );
@@ -133,33 +141,32 @@ export class PerfilComponent implements OnInit {
             }
           );
         }
-      }else{
+      } else {
 
-        this.msm_confirm_pass = "";
+        this.msm_confirm_pass = '';
         this.data_send = {
           _id: this.datos_user._id,
-          nombre: configForm.value.nombre,
-          telefono: configForm.value.telefono,
-          imagen : this.file,
-          bio: configForm.value.bio,
-          twitter: configForm.value.twitter,
-          facebook: configForm.value.facebook,
-          tlint: configForm.value.tlint,
-
+          name: configForm.value.name,
+          surname: configForm.value.surname,
+          cellphone: configForm.value.cellphone,
+          image: this.file,
+          description: configForm.value.description,
           estado: configForm.value.estado,
+          location: configForm.value.location,
+          date: configForm.value.date,
 
-        }
+        };
         this._userService.update_config(this.data_send).subscribe(
-          response =>{
+          response => {
             this.msm_success = 'Se actualizó su perfil con exito';
             this._userService.listar('').subscribe(
-              response =>{
+              response => {
                 this.usuarios = response.users;
                 this.socket.emit('save-users', {users: this.usuarios});
 
 
               },
-              errorr =>{
+              errorr => {
 
               }
             );

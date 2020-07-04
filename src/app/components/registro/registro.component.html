@@ -17,9 +17,9 @@
           <!-- Name -->
           <div class="form-group">
             <label for="name" class="sr-only">Nombres</label>
-            <input type="text" class="form-control form-control-lg" id="name" placeholder="Ingrese su nombre" #nombre="ngModel" name="nombre" [(ngModel)]="user.nombre" required>
-            <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" style="width: 100%">
-              <div class="invalid-feedback" *ngIf="nombre.errors.required">
+            <input type="text" class="form-control form-control-lg" id="name" placeholder="Ingrese su nombre" #name="ngModel" name="name" [(ngModel)]="user.name" required>
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" style="width: 100%">
+              <div class="invalid-feedback" *ngIf="name.errors.required">
                 Los nombre son requeridos
               </div>
             </div>
